@@ -45,44 +45,31 @@
   function generateLink() {
     const url = document.getElementById("urlInput").value;
     const title = document.getElementById("titleInput").value;
-    const html = `<a href="${url}" target="_blank">${title}</a>`;
+
+    if (!url || !title) {
+      alert("Please fill in both fields.");
+      return;
+    }
+
+    const html = `
+      <p id="generatedLink">
+        <a href="${url}" target="_blank" rel="noopener noreferrer">${title}</a>
+      </p>
+      <button onclick="copyLink()">Copy Text</button>
+    `;
+
     document.getElementById("output").innerHTML = html;
   }
 
-
-
-  <div id="output"></div>
-
-  <script>
-    function generate() {
-      const title = document.getElementById('title').value;
-      const link = document.getElementById('link').value;
-
-      if (!title || !link) {
-        alert('Please fill in both fields.');
-        return;
-      }
-
-      const outputHTML = `
-        <p id="generatedLink">
-          <a href="${link}" target="_blank" rel="noopener noreferrer">${title}</a>
-        </p>
-        <button onclick="copyLink()">Copy Text</button>
-      `;
-
-      document.getElementById('output').innerHTML = outputHTML;
-    }
-
-    function copyLink() {
-      const phrase = document.getElementById("generatedLink").innerText;
-      navigator.clipboard.writeText(phrase).then(() => {
-        alert("✅ Copied! Paste your link anywhere you like.");
-      }).catch(err => {
-        console.error("Copy failed:", err);
-        alert("Oops, something went wrong while copying.");
-      });
-    }
-  </script>
-
+  function copyLink() {
+    const phrase = document.getElementById("generatedLink").innerText;
+    navigator.clipboard.writeText(phrase).then(() => {
+      alert("✅ Copied! Paste your link anywhere you like.");
+    }).catch(err => {
+      console.error("Copy failed:", err);
+      alert("Oops, something went wrong while copying.");
+    });
+  }
+</script>
 </body>
 </html>
