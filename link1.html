@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Link Generator</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f0f4f8;
+      padding: 40px;
+      text-align: center;
+    }
+    input {
+      padding: 10px;
+      margin: 10px;
+      width: 250px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 10px;
+      font-size: 16px;
+      background-color: #000080;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #output {
+      margin-top: 30px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>✨ Simple Link Generator ✨</h2>
+
+  <input type="text" id="title" placeholder="Enter short phrase">
+  <br>
+  <input type="text" id="link" placeholder="Enter your URL">
+  <br>
+  <button onclick="generate()">Generate</button>
+
+  <div id="output"></div>
+
+  <script>
+    function generate() {
+      const title = document.getElementById('title').value;
+      const link = document.getElementById('link').value;
+
+      if (!title || !link) {
+        alert('Please fill in both fields.');
+        return;
+      }
+
+      const outputHTML = `
+        <p id="generatedLink">
+          <a href="${link}" target="_blank" rel="noopener noreferrer">${title}</a>
+        </p>
+        <button onclick="copyLink()">Copy Text</button>
+      `;
+
+      document.getElementById('output').innerHTML = outputHTML;
+    }
+
+    function copyLink() {
+      const phrase = document.getElementById("generatedLink").innerText;
+      navigator.clipboard.writeText(phrase).then(() => {
+        alert("✅ Copied! Paste your link anywhere you like.");
+      }).catch(err => {
+        console.error("Copy failed:", err);
+        alert("Oops, something went wrong while copying.");
+      });
+    }
+  </script>
+
+</body>
+</html>
