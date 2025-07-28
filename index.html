@@ -36,11 +36,20 @@
 
   <h2>✨ Simple Link Generator ✨</h2>
 
-  <input type="text" id="title" placeholder="Enter short phrase">
-  <br>
-  <input type="text" id="link" placeholder="Enter your URL">
-  <br>
-  <button onclick="generate()">Generate</button>
+ <input type="text" id="urlInput" placeholder="Enter URL">
+<input type="text" id="titleInput" placeholder="Enter title">
+<button onclick="generateLink()">Generate</button>
+<div id="output"></div>
+
+<script>
+  function generateLink() {
+    const url = document.getElementById("urlInput").value;
+    const title = document.getElementById("titleInput").value;
+    const html = `<a href="${url}" target="_blank">${title}</a>`;
+    document.getElementById("output").innerHTML = html;
+  }
+
+
 
   <div id="output"></div>
 
